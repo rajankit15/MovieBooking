@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&family=Sedgwick+Ave+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Montserrat:wght@500&family=Playpen+Sans:wght@200;400&family=Sedgwick+Ave+Display&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Joan', serif;
+}
+
+a {
+    text-decoration: none;
+    color: #adadad;
+}
+
+.btn {
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: #cd8c38;
+    border-radius: 2rem;
+    color: #1e1f26;
+    transition: .3s;
+}
+
+.btn:hover {
+    background-color: #92601f;
+}
+
+.btn-l {
+    text-align: center;
+    padding: 8px 25px;
+}
+
+body {
+    background-color: #1e1f26;
+    display: grid;
+    grid-template-columns: 1380px;
+    justify-content: space-evenly;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.left-content {
+    display: flex;
+    align-items: center;
+}
+
+.title a {
+    margin-left: 30px;
+    color: #cd8c38;
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 30px;
+}
+
+.navigation {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.navigation li {
+    margin-right: 1rem;
+}
+
+/* Dropdown Button */
+
+.dropbtn {
+    background-color: #cd8c38;
+    color: #1e1f26;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 2rem;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-left: 70px;
+    color: #1e1f26;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.dropdown-menu{
+    background-color: #efcb9d;
+}
+
+.dropdown-menu :hover{
+    background-color: #cd8c38;
+}
+
+/* information */
+.information {
+    background: linear-gradient(45deg, rgba(255, 255, 255, .05), rgba(205, 140, 56, .15));
+    backdrop-filter: blur(5px);
+    height: fit-content;
+    border-radius: 1rem;
+    padding: 2rem 2.5rem;
+    display: flex;
+    margin-bottom: 50px;
+}
+
+.image-container {
+    margin-right: 40px;
+}
+
+.image-desc h1 {
+    font-size: 33px;
+    color: #f4bc74;
+    font-family: 'Edu TAS Beginner', cursive;
+    font-family: 'Montserrat', sans-serif;
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Sedgwick Ave Display', cursive;
+    letter-spacing: 3px;
+}
+
+.image-desc p{
+    font-size: 19px;
+    color: white;
+    padding: 16px;
+}
+
+.choice{
+    display: flex;
+    justify-content: space-between;
+}
+
+.book-btn{
+    margin-right: 100px;
+    display: inline-block;
+    padding: .5rem 1rem;
+    background-color: #cd8c38;
+    border-radius: 2rem;
+    color: #1e1f26;
+    transition: .3s;
+    cursor: pointer;
+    font-size: larger;
+    border: none;
+}
+
+.book-btn:hover {
+    background-color: #92601f;
+    color: white;
+}

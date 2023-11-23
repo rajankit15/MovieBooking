@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
+    <title>Payment</title>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <section class="top-bar">
+        <h2 class="title"><a href="/home">Cinematica</a></h2>
+    </section>
+
+    <!-- Main Container -->
+    <div style="display:flex;gap:50px;justify-content:center;">
+        <div class="main-container" style="font-size:50px;color:white;padding-top: 80px;">
+            REVIEW<br>SELECTED<br>DETAILS.
+        </div>
+        <div class="main-container" style="display: flex;flex-direction:column;">
+            <div class="sub-heading">Movie : &nbsp;<span class="sb-detail" id="movieValue"></span></div>
+            <div class="sub-heading">Language : &nbsp;<span class="sb-detail" id="language"></span></div>
+            <div class="sub-heading">City : &nbsp;<span class="sb-detail" id="cityValue"></span></div>
+            <div class="sub-heading">Date : &nbsp;<span class="sb-detail" id="dateValue"></span></div>
+            <div class="sub-heading">Theatre : &nbsp;<span class="sb-detail" id="theatreValue"></span></div>
+            <div class="sub-heading">Screen & Time : &nbsp;<span class="sb-detail" id="screenTimeValue"></span></div>
+            <div class="sub-heading">Tickets : &nbsp;<span class="sb-detail" id="ticketsValue"></span></div>
+            <div class="sub-heading">Seats : &nbsp;<span class="sb-detail" id="selectedSeatsValue"></span></div>
+            <div class="sub-heading">Payment Amount : &nbsp;<span class="sb-detail" id="totalValue"></span></div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="payment-option">
+            <div style="font-size: 24px;color:#cd8c38;display:flex;flex-direction:column">Choose Payment Method</div>
+            <div class="cards">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="creditcard" value="option1"
+                        checked>
+                    <label class="form-check-label" for="exampleRadios1" style="color: white;font-size:20px;">
+                        Credit Card
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="debitcard" value="option2">
+                    <label class="form-check-label" for="exampleRadios2" style="color: white;font-size:20px;">
+                        Debit Card
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="exampleRadios" id="giftcard" value="option2">
+                    <label class="form-check-label" for="exampleRadios2" style="color: white;font-size:20px;">
+                        Gift Card
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="enter-details">
+            <div class="credit-card">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="card holder's name"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter bank name"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter card number"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="Valid Through" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="cvv" aria-describedby="basic-addon1">
+                </div>
+                <div class="btn" onclick="ticketshow()">Pay Now</div>
+            </div>
+
+            <div class="debit-card">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="card holder's name"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter bank name"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter card number"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="Valid Through" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="cvv" aria-describedby="basic-addon1">
+                </div>
+                <div class="btn" onclick="ticketshow()">Pay Now</div>
+            </div>
+
+            <div class="gift-card">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fas fa-credit-card"></i></span>
+                    <input type="text" class="form-control" placeholder="card holder's name"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fal fa-gift-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter giftcard number"
+                        aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><i class="fal fa-gift-card"></i></span>
+                    <input type="text" class="form-control" placeholder="enter pin" aria-describedby="basic-addon1">
+                </div>
+                <div class="btn" onclick="ticketshow()">Pay Now</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Get radio buttons and card divs
+        var creditCardRadio = document.getElementById('creditcard');
+        var debitCardRadio = document.getElementById('debitcard');
+        var giftCardRadio = document.getElementById('giftcard');
+
+        var creditCardDiv = document.querySelector('.credit-card');
+        var debitCardDiv = document.querySelector('.debit-card');
+        var giftCardDiv = document.querySelector('.gift-card');
+
+        // Function to show/hide card divs based on selected option
+        function updateCardDisplay() {
+            if (creditCardRadio.checked) {
+                creditCardDiv.style.display = 'block';
+                debitCardDiv.style.display = 'none';
+                giftCardDiv.style.display = 'none';
+            } else if (debitCardRadio.checked) {
+                creditCardDiv.style.display = 'none';
+                debitCardDiv.style.display = 'block';
+                giftCardDiv.style.display = 'none';
+            } else if (giftCardRadio.checked) {
+                creditCardDiv.style.display = 'none';
+                debitCardDiv.style.display = 'none';
+                giftCardDiv.style.display = 'block';
+            }
+        }
+
+        // Initial setup
+        updateCardDisplay();
+
+        // Attach event listeners to radio buttons
+        creditCardRadio.addEventListener('change', updateCardDisplay);
+        debitCardRadio.addEventListener('change', updateCardDisplay);
+        giftCardRadio.addEventListener('change', updateCardDisplay);
+
+        function getParams() {
+            var params = {};
+            var searchParams = new URLSearchParams(window.location.search);
+            for (let param of searchParams) {
+                params[param[0]] = param[1];
+            }
+            return params;
+        }
+
+        var urlParams = getParams();
+
+        document.getElementById('movieValue').textContent = urlParams.movieName || 'Not Selected';
+        document.getElementById('language').textContent = urlParams.language || 'Not Selected';
+        document.getElementById('cityValue').textContent = urlParams.city || 'Not Selected';
+        document.getElementById('dateValue').textContent = urlParams.date || 'Not Selected';
+        document.getElementById('theatreValue').textContent = urlParams.theatre || 'Not Selected';
+        document.getElementById('screenTimeValue').textContent = urlParams.screenTime || 'Not Selected';
+        document.getElementById('ticketsValue').textContent = urlParams.tickets || 'Not Selected';
+        document.getElementById('selectedSeatsValue').textContent = urlParams.selectedSeats || 'Not Selected';
+        document.getElementById('totalValue').textContent = urlParams.total || 'Not Selected';
+
+    });
+
+    function ticketshow() {
+        var movieName = document.getElementById('movieValue').textContent;
+        var language = document.getElementById('language').textContent;
+        var city = document.getElementById('cityValue').textContent;
+        var date = document.getElementById('dateValue').textContent;
+        var theatre = document.getElementById('theatreValue').textContent;
+        var screenTime = document.getElementById('screenTimeValue').textContent;
+        var tickets = document.getElementById('ticketsValue').textContent;
+        var selectedSeats = document.getElementById('selectedSeatsValue').textContent;
+        var total = document.getElementById('totalValue').textContent;
+        var custid = '{{custid}}';
+    
+        var paymentType = document.querySelector('input[name="exampleRadios"]:checked').value;
+    
+        var cardHolderName = document.querySelector('.credit-card input[placeholder="card holder\'s name"]').value;
+        var bankName = document.querySelector('.credit-card input[placeholder="enter bank name"]').value;
+        var cardNumber = document.querySelector('.credit-card input[placeholder="enter card number"]').value;
+        var validThrough = document.querySelector('.credit-card input[placeholder="Valid Through"]').value;
+        var cvv = document.querySelector('.credit-card input[placeholder="cvv"]').value;
+    
+        var data = {
+            "movieName": movieName,
+            "language": language,
+            "city": city,
+            "date": date,
+            "theatre": theatre,
+            "screenTime": screenTime,
+            "tickets": tickets,
+            "selectedSeats": selectedSeats,
+            "total": total,
+            "paymentType": paymentType, // Include the payment type in the data
+            "cardHolderName": cardHolderName,
+            "bankName": bankName,
+            "cardNumber": cardNumber,
+            "validThrough": validThrough,
+            "cvv": cvv
+        };
+    
+        var xhr = new XMLHttpRequest();
+        var url = `/ticket/${custid}`;
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+    
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    window.location.href = `/ticket/${custid}?movieName=${movieName}&language=${language}&city=${city}&date=${date}&theatre=${theatre}&screenTime=${screenTime}&tickets=${tickets}&selectedSeats=${selectedSeats}&total=${total}`;
+                } else {
+                    console.error('Error:', xhr.statusText);
+                }
+            }
+        };
+    
+        xhr.send(JSON.stringify(data));
+    }
+    
+</script>
+
+
+</html>

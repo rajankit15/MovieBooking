@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&family=Sedgwick+Ave+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@200;400&family=Sedgwick+Ave+Display&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Playpen+Sans:wght@200;400&family=Sedgwick+Ave+Display&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #1e1f26;
+}
+
+.brand-name {
+    font-family: 'Playpen Sans', cursive;
+    font-family: 'Sedgwick Ave Display', cursive;
+    font-size: 65px;
+    padding-bottom: 5px;
+    color: #f78f07;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.container {
+    width: 30vw;
+    height: 80vh;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.signin-signup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 5;
+}
+
+.input-field {
+    width: 100%;
+    height: 50px;
+    background: #f0f0f0;
+    margin: 10px 0;
+    border: 2px solid #f78f07;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.input-field i {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    font-size: 18px;
+}
+
+.input-field input {
+    flex: 5;
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 600;
+    color: #444;
+}
+
+.btn {
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    background: #f78f07;
+    color: #fff;
+    font-weight: 600;
+    margin: 10px 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #eea94d;
+}
+
+a {
+    text-decoration: none;
+}
+
+.panels-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 35%;
+    min-width: 238px;
+    /* padding: 0 10px; */
+    text-align: center;
+    z-index: 6;
+}
+
+h3{
+    margin-bottom: 20px;
+    margin-top: 50px;
+}

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans&family=Sedgwick+Ave+Display&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Joan', serif;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	background-color: #1e1f26;
+	display: grid;
+	grid-template-columns: 1380px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+}
+
+.btn {
+	padding: .5rem 1rem;
+	background-color: #cd8c38;
+	border-radius: 2rem;
+	color: #1e1f26;
+	width: 30%;
+	margin-left: 100px;
+}
+
+.btn:hover {
+	background-color: #aa6b18;
+	color: white;
+}
+
+.heading {
+	font-size: 30px;
+}
+
+.sub-heading {
+	font-size: 20px;
+	margin-bottom: 5px;
+	display: flex;
+}
+
+/* Top Bar */
+.top-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-left: 1.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+	box-shadow: 0 4px 2px -2px rgba(255, 255, 255, .05);
+	border-radius: 20px;
+}
+
+.title a {
+	margin-left: 30px;
+	color: #cd8c38;
+	font-family: 'Playpen Sans', cursive;
+	font-family: 'Sedgwick Ave Display', cursive;
+	font-size: 30px;
+}
+
+/* main container */
+.main-container {
+	background: linear-gradient(45deg, rgba(255, 255, 255, .05), rgba(205, 140, 56, .15));
+	backdrop-filter: blur(5px);
+	/* height: 800px; */
+	width: 60%;
+	border-radius: 1rem;
+	padding: 2rem 2.5rem;
+	display: flex;
+	margin-bottom: 50px;
+	margin-top: 40px;
+	flex-direction: column;
+	gap: 50px;
+	margin-left: 330px;
+	text-align: center;
+}
+
+.ticket-details{
+	color: wheat;
+	font-size: 20px;
+	text-align: left;
+	margin-left: 250px;
+	line-height: 15px;
+}
+

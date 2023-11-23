@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/seat_book.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Cinematica</title>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <section class="top-bar">
+        <h2 class="title"><a href="/home">Cinematica</a></h2>
+    </section>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <div class="seat-selection">
+            <div class="display-screen">All Eyes this way</div>
+
+            <div class="seats" style="margin:20px 150px;text-align: center;">
+                {% for i in range(7) %}
+                <div>
+                    {% for j in range(12) %}
+                    {% set seat_id = (i+1)|string + (j|char) %}
+                    {% set seat_status = status[i*12 + j] %}
+                    {% if seat_status[2] == 'Booked' %}
+                    <i class="fal fa-square" style="font-size: 45px; margin: 5px;color:rgb(78, 76, 76);"
+                        id="{{ seat_id }}" data-seat="{{ seat_id }}" data-status="Booked"
+                        data-price="{{status[i*12 + j][3]}}"></i>
+                    {% elif seat_status[2] == 'Available' %}
+                    <i class="fal fa-square" style="font-size: 45px; margin: 5px;" id="{{ seat_id }}"
+                        data-seat="{{ seat_id }}" data-status="Available" data-price="{{status[i*12 + j][3]}}"></i>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="status" style="display:flex; justify-content:center;gap:40px;">
+                <div class="item">Available</div>
+                <div class="item">Booked</div>
+                <div class="item">Selected</div>
+            </div>
+        </div>
+
+        <div class="vl" style="border-left: 3px solid white;padding-top: 20px;padding-bottom: 20px;"></div>
+
+        <div class="details">
+            <div>
+                <div class="sub-heading">Movie : &nbsp<div class="sb-detail">{{movie[1]}} ({{movie[3]}})</div>
+                </div>
+                <div class="sub-heading">City : &nbsp<div class="sb-detail">{{selected_city}}</div>
+                </div>
+                <div class="sub-heading">Date : &nbsp<div class="sb-detail">{{date}}/11/2023</div>
+                </div>
+                <div class="sub-heading">Theatre : &nbsp<div class="sb-detail">{{hall}}</div>
+                </div>
+                <div class="sub-heading">Screen & Time : &nbsp<div class="sb-detail" id="screen-time">{{ screentime }}
+                    </div>
+                </div>
+                <div class="sub-heading">Tickets : &nbsp<div class="total-ticket" style="color: #cd8c38;"><span
+                            id="selected-count">0</span></div>
+                </div>
+                <div class="sub-heading">Selected Seats : &nbsp<div class="sb-detail" id="selected-seats">none</div>
+                </div>
+                <div class="sub-heading">Total : &nbsp<div class="sb-detail" id="total-price"> 0 Rs</div>
+                </div>
+            </div>
+
+            <!-- button -->
+            <div>
+                <button class="btn" id="continue-to-payment" style="float: right;">Continue to payment</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function updateTotalPrice() {
+        var selectedSeats = $('.selected');
+        var total = 0;
+        var selectedSeatList = [];
+
+        selectedSeats.each(function () {
+            total += parseInt($(this).data('price'));
+            selectedSeatList.push($(this).data('seat'));
+
+            var a = $(this).data('price');
+
+            console.log("Seat price:", a);
+
+        });
+
+        var totalPriceElement = $('#total-price').text(total + ' Rs');
+        totalPriceElement.css('color', '#cd8c38');
+
+        var selectedSeatsElement = $('#selected-seats');
+        if (selectedSeatList.length > 0) {
+            var seatsHtml = '';
+            for (var i = 0; i < selectedSeatList.length; i += 5) {
+                seatsHtml += selectedSeatList.slice(i, i + 5).join(', ') + '<br>';
+            }
+            selectedSeatsElement.html(seatsHtml);
+        } else {
+            selectedSeatsElement.text('');
+        }
+    }
+
+    function getValues() {
+        var movieName = '{{movie[1]}}';
+        var language = '{{movie[3]}}';
+        var city = '{{selected_city}}';
+        var date = '{{date}}/11/2023';
+        var theatre = '{{hall}}';
+        var screenTime = '{{screentime}}';
+        var tickets = $('#selected-count').text();
+        var selectedSeats = $('#selected-seats').text();
+        var total = $('#total-price').text();
+
+        return {
+            movieName: movieName,
+            language: language,
+            city: city,
+            date: date,
+            theatre: theatre,
+            screenTime: screenTime,
+            tickets: tickets,
+            selectedSeats: selectedSeats,
+            total: total
+        };
+    }
+
+
+    $(document).ready(function () {
+        $('.fal.fa-square').click(function () {
+            var seatStatus = $(this).data('status');
+
+            // Check if the seat is available before toggling and updating count
+            if (seatStatus !== 'Booked') {
+                // Toggle a selected class to change the icon's appearance
+                $(this).toggleClass('selected');
+
+                // Update the selected seats count
+                var selectedCount = $('.selected').length;
+                $('#selected-count').text(selectedCount);
+
+                // Update the total price
+                updateTotalPrice();
+            }
+        });
+    });
+
+    $('#continue-to-payment').click(function () {
+        var selectedSeatsCount = parseInt($('#selected-count').text());
+
+        if (selectedSeatsCount === 0) {
+            alert("Please select at least one seat before continuing to payment.");
+        }
+        else {
+            var values = getValues();
+            var query = $.param(values);
+            var url = "/payment/{{movie[0]}}/{{custid}}?" + query
+            window.location.href = url;
+        }
+    });
+</script>
+
+
+</html>

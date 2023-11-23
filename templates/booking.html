@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+    <title>My Bookings</title>
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <section class="top-bar">
+        <h2 class="title"><a href="/home">Cinematica</a></h2>
+    </section>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        {% if booking_detail %}
+            {% set grouped_bookings = {} %}
+            {% for booking in booking_detail %}
+                {% set key = booking[:2] + booking[3:6] %}
+                {% if key not in grouped_bookings %}
+                    {% set _ = grouped_bookings.update({key: {'details': booking[:8], 'seat_numbers': [booking[2]], 'city': booking[6]}}) %}
+                {% else %}
+                    {% set _ = grouped_bookings[key]['seat_numbers'].append(booking[2]) %}
+                {% endif %}
+            {% endfor %}
+    
+            {% for details, data in grouped_bookings.items() %}
+                <div class="bkg-details">
+                    <div style="justify-content: space-evenly; display: flex;">
+                        <p>Date: <span style="color: #cd8c38;">{{ data['details'][7] }}</span></p>
+                        <p>Movie Name: <span style="color: #d07f15;font-weight:bolder">{{ data['details'][0] }}</span></p>
+                        <p>Theatre: <span style="color: #cd8c38;">{{ data['details'][1] }}</span></p>
+                        <p>City: <span style="color: #cd8c38;">{{ data['city'] }}</span></p>
+                    </div>
+                    <div style="justify-content: space-evenly; display: flex;">
+                        <p>Language: <span style="color: #cd8c38;">{{ data['details'][5] }}</span></p>
+                        <p>Seat No: <span style="color: #cd8c38;">{{ data['seat_numbers']|join(', ') }}</span></p>
+                        <p>Screen & Time: <span style="color: #cd8c38;">Screen {{ data['details'][3] }}</span></p>
+                        <p>Show Time: <span style="color: #cd8c38;">{{ data['details'][4] }}</span></p>
+                    </div>
+                    <div class="btn" style="float: right;">
+                        <a href="{{ url_for('cancel_booking', custid = custid , movie_name=data['details'][0] , language=data['details'][5] ) }}" style="color:white;">Cancel Booking</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="bkg-details" style="border: none;">
+                <div class="no-booking" style="color: white; text-align: center; font-size: 30px;">
+                    <p>No booking</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    
+    
+</body>
+
+</html>
